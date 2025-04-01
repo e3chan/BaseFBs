@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.14">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.14" TcVersionFixed="true">
 	<Project ProjectGUID="{877EEDFC-2AE4-404E-8EED-6F9AB6C94017}" Target64Bit="true" ShowHideConfigurations="#x6">
 		<System>
 			<Settings MaxCpus="16" PCoreAffinity="4095" ECoreAffinity="61440"/>
@@ -11,7 +11,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{C4B03FC6-6E46-40ED-A713-18E927403C49}" Name="BaseFBs" PrjFilePath="BaseFBs\BaseFBs.plcproj" TmcFilePath="BaseFBs\BaseFBs.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{6FBFCF08-BBBB-335D-D23A-7EC4FC750B31}" TmcPath="BaseFBs\BaseFBs.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{BCDC494C-3FC3-38D7-DE1D-47F2F7B95E3F}" TmcPath="BaseFBs\BaseFBs.tmc">
 					<Name>BaseFBs Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>

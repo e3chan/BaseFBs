@@ -16,6 +16,13 @@
     <Implicit_KindOfTask>{b10bc9c5-dc2c-4351-b095-8942a4f60916}</Implicit_KindOfTask>
     <Implicit_Jitter_Distribution>{e3e49b8e-91c7-4823-ad7d-9b283f43d8af}</Implicit_Jitter_Distribution>
     <LibraryReferences>{ea848f46-78e6-4aa1-98a3-72ca7981aff1}</LibraryReferences>
+    <Released>false</Released>
+    <AllowChecksForLibrary>false</AllowChecksForLibrary>
+    <POUsForPropertyAccessIncluded>false</POUsForPropertyAccessIncluded>
+    <GlobalVersionStructureIncluded>false</GlobalVersionStructureIncluded>
+    <Company>Personal</Company>
+    <Title>BaseFBs</Title>
+    <ProjectVersion>1.0.0.1</ProjectVersion>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="FBs\FB_Base.TcPOU">
@@ -88,6 +95,17 @@
     <None Include="BaseFBs.tmc">
       <SubType>Content</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PlaceholderResolution Include="Tc2_Standard">
+      <Resolution>Tc2_Standard, 3.4.5.0 (Beckhoff Automation GmbH)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="Tc2_System">
+      <Resolution>Tc2_System, 3.6.4.0 (Beckhoff Automation GmbH)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="Tc3_Module">
+      <Resolution>Tc3_Module, 3.4.5.0 (Beckhoff Automation GmbH)</Resolution>
+    </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>
