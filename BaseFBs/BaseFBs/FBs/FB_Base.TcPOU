@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Base" Id="{1b877d1c-c148-4ce1-b504-f1a684f4690b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT FB_Base IMPLEMENTS ITF_Base
+VAR
+	_Definition				: ST_BaseDefinition;
+	_EnableManualControl	: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="Definition" Id="{b6a8add8-928c-44fd-95f2-a7123022e2b1}">
+      <Declaration><![CDATA[PROPERTY Definition : REFERENCE TO ST_BaseDefinition]]></Declaration>
+      <Get Name="Get" Id="{79215c66-6435-4348-887a-de976332b211}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Definition REF= _Definition;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="EnableManualControl" Id="{878b68fe-e504-47d7-a7db-91ff55dbb844}">
+      <Declaration><![CDATA[PROPERTY EnableManualControl : BOOL]]></Declaration>
+      <Set Name="Set" Id="{02d5433a-364f-43db-bf26-31ce824317bc}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_EnableManualControl := EnableManualControl;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+  </POU>
+</TcPlcObject>

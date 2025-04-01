@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="ITF_Base" Id="{f927fc98-80f2-4c43-8ca7-3a1dc177fbb8}">
+    <Declaration><![CDATA[INTERFACE ITF_Base
+
+]]></Declaration>
+    <Property Name="Definition" Id="{d3f380f3-139f-4c79-9cc9-daf5cb03a0ef}">
+      <Declaration><![CDATA[PROPERTY Definition : REFERENCE TO ST_BaseDefinition
+
+]]></Declaration>
+      <Get Name="Get" Id="{406c1840-fb71-40c6-832d-088762f4eca3}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="EnableManualControl" Id="{bd485c9d-33f4-40ef-a176-6d3e976ee598}">
+      <Declaration><![CDATA[PROPERTY EnableManualControl : Bool]]></Declaration>
+      <Set Name="Set" Id="{78d70ea4-8243-4fa4-bacc-bc59f662c5dc}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+  </Itf>
+</TcPlcObject>

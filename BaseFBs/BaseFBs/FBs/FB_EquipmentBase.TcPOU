@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_EquipmentBase" Id="{e77bf064-16c2-430d-960e-be3e22f8a804}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT FB_EquipmentBase EXTENDS FB_Base IMPLEMENTS ITF_EquipmentBase
+
+VAR
+	fbAlarm		: FB_Alarm;
+	_MainAlarm	: ST_EquipmentAlarm;
+	_AlarmListDetails	: ST_EquipmentAlarmListDetails;
+	AlarmListUpperBound		: DINT;
+	AlarmListLowerBound		: DINT;
+	EmptyAlarmList			: BOOL;
+	
+	EquipmentBaseFirstScan	: BOOL := TRUE;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbAlarm.Definition.Name := _Definition.Name;
+
+_AlarmListDetails := fbAlarm.AlarmListDetails;
+
+IF EquipmentBaseFirstScan THEN
+	_GenerateAlarmList();
+END_IF
+
+EquipmentBaseFirstScan := FALSE;]]></ST>
+    </Implementation>
+    <Folder Name="Private" Id="{eaa50c90-413b-48b9-b08b-9d6ab1b7b566}" />
+    <Folder Name="Protected" Id="{f7e2bf14-fbfe-4dc5-9ea4-cc998f72e84e}" />
+    <Method Name="_GenerateAlarmList" Id="{e2f68562-f932-489c-967c-792a0bdd46a0}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED ABSTRACT _GenerateAlarmList
+ 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="_RaiseAlarm" Id="{0301a642-de40-43e4-8a9e-3537a1e87242}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED _RaiseAlarm
+VAR_INPUT
+	ErrorToRaise	: REFERENCE TO ST_EquipmentAlarm;
+	ConcatenateMessage	: T_MaxString;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ErrorToRaise.Active := TRUE;
+
+IF (NOT _MainAlarm.Active) OR (ErrorToRaise.Severity > _MainAlarm.Severity) THEN
+	_MainAlarm := ErrorToRaise;
+	
+	IF ConcatenateMessage <> '' THEN
+		_MainAlarm.Message := CONCAT(STR1 := _MainAlarm.Message, STR2 := ConcatenateMessage);
+	END_IF
+	
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="AlarmListDetails" Id="{1f66c5f8-626a-4d0b-b96e-58c538eb9851}">
+      <Declaration><![CDATA[{warning 'Add property implementation'}
+PROPERTY AlarmListDetails : REFERENCE TO ST_EquipmentAlarmListDetails]]></Declaration>
+      <Get Name="Get" Id="{78f64111-ad79-4cde-89ec-e95a628e92da}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ AlarmListDetails REF= _AlarmListDetails;  ]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="MainAlarm" Id="{081629dd-123b-4510-8359-9d021fc8aed0}">
+      <Declaration><![CDATA[{warning 'Add property implementation'}
+PROPERTY MainAlarm : REFERENCE TO ST_EquipmentAlarm
+]]></Declaration>
+      <Get Name="Get" Id="{4d16a016-581a-40c7-b3f3-ae820ef4f7a2}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[MainAlarm REF= _MainAlarm;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Reset" Id="{5da1eedc-a288-47a9-9e0a-fb726d5f8c2c}">
+      <Declaration><![CDATA[{warning 'Add method implementation '}
+METHOD Reset
+VAR
+	ErrorIndex	: DINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_MainAlarm.Active := FALSE;
+_MainAlarm.Severity := TcEventSeverity.Verbose;
+_MainAlarm.Message := '';
+
+fbAlarm.Reset();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

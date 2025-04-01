@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="E_TestEquipmentAlarmList" Id="{67ddde9f-8772-4ce7-884a-41098a166ea9}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+{attribute 'to_string'}
+TYPE E_TestEquipmentAlarmList :
+(
+	VerboseAlarm,
+	InfoAlarm,
+	WarningAlarm,
+	ErrorAlarm,
+	CriticalAlarm
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

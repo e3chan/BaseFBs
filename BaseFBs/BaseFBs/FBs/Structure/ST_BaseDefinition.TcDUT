@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_BaseDefinition" Id="{55ecabba-df22-47a7-bcdf-fa724bff02cb}">
+    <Declaration><![CDATA[TYPE ST_BaseDefinition :
+STRUCT
+	Name		: STRING(40);
+	Station		: string(40);
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

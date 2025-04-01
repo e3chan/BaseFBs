@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Alarm" Id="{e7d8febd-ea8a-4a9c-a80e-4d96c571207c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK  FB_Alarm EXTENDS FB_Base IMPLEMENTS ITF_Base
+VAR_IN_OUT
+	AlarmList	: ARRAY[*] OF ST_EquipmentAlarm;
+END_VAR
+VAR
+	_AlarmListDetails	: ST_EquipmentAlarmListDetails;
+	AlarmListUpperBound		: DINT;
+	AlarmListLowerBound		: DINT;
+	EmptyAlarmList			: BOOL;
+	
+	AlarmIndex				: DINT;
+	DefinationNameScanned	: BOOL := FALSE;
+	
+	FirstScan	: BOOL := TRUE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_AlarmListHandling();
+
+IF _Definition.Name <> '' AND not DefinationNameScanned THEN
+	
+	FOR AlarmIndex := AlarmListLowerBound TO AlarmListUpperBound BY 1 DO
+		AlarmList[AlarmIndex].Message := CONCAT(STR1 := ': ', STR2 := AlarmList[AlarmIndex].Message);
+		AlarmList[AlarmIndex].Message := CONCAT(STR1 := _Definition.Name, STR2 := AlarmList[AlarmIndex].Message);
+	END_FOR
+	
+	DefinationNameScanned := TRUE;
+END_IF
+
+FirstScan := FALSE;]]></ST>
+    </Implementation>
+    <Folder Name="Private" Id="{362ad2b0-bf91-49bd-a0ad-88439409bd6a}" />
+    <Method Name="_AlarmListHandling" Id="{b54bd135-d19f-4d05-8244-e84e8bd02dc7}" FolderPath="Private\">
+      <Declaration><![CDATA[METHOD Private _AlarmListHandling
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+EmptyAlarmList := FALSE;
+IF (SIZEOF(AlarmList) = 0) OR (AlarmList = 0) THEN
+	EmptyAlarmList := TRUE;
+	RETURN;
+END_IF
+	
+IF FirstScan THEN	
+	AlarmListLowerBound := LOWER_BOUND(AlarmList,1);
+	AlarmListUpperBound := UPPER_BOUND(AlarmList,1);
+	
+	_AlarmListDetails.AlarmListSize := AlarmListUpperBound - AlarmListLowerBound + 1;
+	_AlarmListDetails.FirstAlarm := ADR(AlarmList[AlarmListLowerBound]);
+	
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="AlarmListDetails" Id="{8a4ef703-7f7c-44cc-a846-9ccc3f397305}">
+      <Declaration><![CDATA[{warning 'Add property implementation'}
+PROPERTY AlarmListDetails : REFERENCE TO ST_EquipmentAlarmListDetails]]></Declaration>
+      <Get Name="Get" Id="{7ee7932c-571b-4b49-88bd-654e3b021e83}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ AlarmListDetails REF= _AlarmListDetails;  ]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Reset" Id="{9543fbeb-05b5-4019-887d-2718a90d0c19}">
+      <Declaration><![CDATA[{warning 'Add method implementation '}
+METHOD Reset
+VAR
+	ErrorIndex	: DINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF EmptyAlarmList THEN
+	RETURN;
+END_IF
+
+FOR ErrorIndex := AlarmListLowerBound TO AlarmListUpperBound BY 1 DO
+	AlarmList[ErrorIndex].Active := FALSE;
+END_FOR]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

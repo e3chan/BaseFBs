@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="MAIN" Id="{72253cc2-044e-4b72-9460-526041b96d44}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	fbTestBase : FB_TestBase;
+	fbTestEquipmentBase	: FB_TestEquipmentBase;
+	
+	AnotherTestAlarmList	: ARRAY[E_TestEquipmentAlarmList.VerboseAlarm..E_TestEquipmentAlarmList.CriticalAlarm] OF ST_EquipmentAlarm;
+	
+	Reset	: BOOL;
+	
+END_VAR
+
+VAR PERSISTENT
+	TestManualControl	: ARRAY[1..3] OF BOOL;
+	TestName			: ARRAY[1..3] OF STRING(40);
+	TestStation			: ARRAY[1..3] OF STRING(40);	
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbTestBase.Definition.Name := TestName[1];
+fbTestBase.Definition.Station := TestStation[1];
+fbTestBase.EnableManualControl := TestManualControl[1];
+
+fbTestBase();
+
+fbTestEquipmentBase.Definition.Name := TestName[2];
+fbTestEquipmentBase.Definition.Station := TestStation[2];
+fbTestEquipmentBase.EnableManualControl := TestManualControl[2];
+
+fbTestEquipmentBase();
+
+IF Reset THEN
+	fbTestEquipmentBase.Reset();
+	Reset := FALSE;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

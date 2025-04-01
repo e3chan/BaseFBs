@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="ITF_EquipmentBase" Id="{4cc029b0-1afe-4c84-800d-5d2f83376e25}">
+    <Declaration><![CDATA[  INTERFACE ITF_EquipmentBase EXTENDS ITF_Base
+]]></Declaration>
+    <Property Name="AlarmListDetails" Id="{903a1200-548f-46b3-8aa2-58d8db6ebb7c}">
+      <Declaration><![CDATA[PROPERTY AlarmListDetails : Reference to ST_EquipmentAlarmListDetails]]></Declaration>
+      <Get Name="Get" Id="{79ba21a9-e9f8-4a9e-a4c8-f59b1d2f7c28}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="MainAlarm" Id="{314f3074-d37f-425f-9578-1f95c292c8db}">
+      <Declaration><![CDATA[PROPERTY MainAlarm : Reference to ST_EquipmentAlarm]]></Declaration>
+      <Get Name="Get" Id="{0008029c-2913-4a3e-984e-4e30149dd0f3}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="Reset" Id="{dcbf8e5f-029c-477e-a94f-255c5f675baf}">
+      <Declaration><![CDATA[METHOD Reset
+
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

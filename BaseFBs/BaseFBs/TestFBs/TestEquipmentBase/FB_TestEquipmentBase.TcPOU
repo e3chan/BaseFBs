@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_TestEquipmentBase" Id="{fcc00cff-345d-4a3c-95a4-aa524a0591fb}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_TestEquipmentBase EXTENDS FB_EquipmentBase
+VAR
+	TestAlarmList	: ARRAY[E_TestEquipmentAlarmList.VerboseAlarm..E_TestEquipmentAlarmList.CriticalAlarm] OF ST_EquipmentAlarm;
+	
+	AlarmType		: E_TestEquipmentAlarmList;
+	RaiseAlarmFlag	: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+SUPER^();
+fbAlarm(AlarmList := TestAlarmList);
+
+IF RaiseAlarmFlag THEN
+	
+	CASE AlarmType OF
+		E_TestEquipmentAlarmList.VerboseAlarm:
+			_RaiseAlarm(ErrorToRaise := TestAlarmList[E_TestEquipmentAlarmList.VerboseAlarm], ConcatenateMessage := '');
+		
+		E_TestEquipmentAlarmList.InfoAlarm:
+			_RaiseAlarm(ErrorToRaise := TestAlarmList[E_TestEquipmentAlarmList.InfoAlarm], ConcatenateMessage := '');
+		
+		E_TestEquipmentAlarmList.WarningAlarm:
+			_RaiseAlarm(ErrorToRaise := TestAlarmList[E_TestEquipmentAlarmList.WarningAlarm], ConcatenateMessage := '');
+		
+		E_TestEquipmentAlarmList.ErrorAlarm:
+			_RaiseAlarm(ErrorToRaise := TestAlarmList[E_TestEquipmentAlarmList.ErrorAlarm], ConcatenateMessage := '');
+		
+		E_TestEquipmentAlarmList.CriticalAlarm:
+			_RaiseAlarm(ErrorToRaise := TestAlarmList[E_TestEquipmentAlarmList.CriticalAlarm], ConcatenateMessage := '');
+		
+	END_CASE
+
+	RaiseAlarmFlag := FALSE;
+END_IF]]></ST>
+    </Implementation>
+    <Method Name="_GenerateAlarmList" Id="{8b2d7c85-0e6a-41fe-ab33-4cc1d0566cf9}">
+      <Declaration><![CDATA[{warning 'Add method implementation '}
+METHOD PROTECTED _GenerateAlarmList
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TestAlarmList[E_TestEquipmentAlarmList.VerboseAlarm].Message 		:= 'Verbose Alarm';
+TestAlarmList[E_TestEquipmentAlarmList.VerboseAlarm].Severity 		:= TcEventSeverity.Verbose;
+
+TestAlarmList[E_TestEquipmentAlarmList.InfoAlarm].Message 			:= 'Info Alarm';
+TestAlarmList[E_TestEquipmentAlarmList.InfoAlarm].Severity 			:= TcEventSeverity.Info;
+
+TestAlarmList[E_TestEquipmentAlarmList.WarningAlarm].Message 		:= 'Warning Alarm';
+TestAlarmList[E_TestEquipmentAlarmList.WarningAlarm].Severity 		:= TcEventSeverity.Warning;
+
+TestAlarmList[E_TestEquipmentAlarmList.ErrorAlarm].Message 			:= 'Error Alarm';
+TestAlarmList[E_TestEquipmentAlarmList.ErrorAlarm].Severity 		:= TcEventSeverity.Error;
+
+TestAlarmList[E_TestEquipmentAlarmList.CriticalAlarm].Message 		:= 'Critical Alarm';
+TestAlarmList[E_TestEquipmentAlarmList.CriticalAlarm].Severity 		:= TcEventSeverity.Critical;
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
