@@ -12,7 +12,7 @@ VAR
 	EmptyAlarmList			: BOOL;
 	
 	AlarmIndex				: DINT;
-	DefinationNameScanned	: BOOL := FALSE;
+	DefinitionNameScanned	: BOOL := FALSE;
 	
 	FirstScan	: BOOL := TRUE;
 END_VAR
@@ -20,14 +20,14 @@ END_VAR
     <Implementation>
       <ST><![CDATA[_AlarmListHandling();
 
-IF _Definition.Name <> '' AND not DefinationNameScanned THEN
+IF _Definition.Name <> '' AND not DefinitionNameScanned THEN
 	
 	FOR AlarmIndex := AlarmListLowerBound TO AlarmListUpperBound BY 1 DO
 		AlarmList[AlarmIndex].Message := CONCAT(STR1 := ': ', STR2 := AlarmList[AlarmIndex].Message);
 		AlarmList[AlarmIndex].Message := CONCAT(STR1 := _Definition.Name, STR2 := AlarmList[AlarmIndex].Message);
 	END_FOR
 	
-	DefinationNameScanned := TRUE;
+	DefinitionNameScanned := TRUE;
 END_IF
 
 FirstScan := FALSE;]]></ST>
