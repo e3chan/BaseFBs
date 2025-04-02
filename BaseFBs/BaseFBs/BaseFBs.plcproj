@@ -22,7 +22,7 @@
     <GlobalVersionStructureIncluded>false</GlobalVersionStructureIncluded>
     <Company>Personal</Company>
     <Title>BaseFBs</Title>
-    <ProjectVersion>1.0.0.1</ProjectVersion>
+    <ProjectVersion>1.0.0.2</ProjectVersion>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="FBs\FB_Base.TcPOU">

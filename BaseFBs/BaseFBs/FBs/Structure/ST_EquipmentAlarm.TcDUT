@@ -4,7 +4,7 @@
     <Declaration><![CDATA[TYPE ST_EquipmentAlarm :
 STRUCT
 	Active			: BOOL;
-	Message			: STRING(80);
+	Message			: T_MaxString;
 	Severity		: TcEventSeverity;
 END_STRUCT
 END_TYPE

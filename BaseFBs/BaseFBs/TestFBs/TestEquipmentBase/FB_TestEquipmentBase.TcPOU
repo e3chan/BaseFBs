@@ -18,19 +18,19 @@ IF RaiseAlarmFlag THEN
 	
 	CASE AlarmType OF
 		E_TestEquipmentAlarmList.VerboseAlarm:
-			_RaiseAlarm(ErrorToRaise := TestAlarmList[E_TestEquipmentAlarmList.VerboseAlarm], ConcatenateMessage := '');
+			_RaiseAlarm(AlarmToRaise := TestAlarmList[E_TestEquipmentAlarmList.VerboseAlarm], ConcatenateMessage := '');
 		
 		E_TestEquipmentAlarmList.InfoAlarm:
-			_RaiseAlarm(ErrorToRaise := TestAlarmList[E_TestEquipmentAlarmList.InfoAlarm], ConcatenateMessage := '');
+			_RaiseAlarm(AlarmToRaise := TestAlarmList[E_TestEquipmentAlarmList.InfoAlarm], ConcatenateMessage := '');
 		
 		E_TestEquipmentAlarmList.WarningAlarm:
-			_RaiseAlarm(ErrorToRaise := TestAlarmList[E_TestEquipmentAlarmList.WarningAlarm], ConcatenateMessage := '');
+			_RaiseAlarm(AlarmToRaise := TestAlarmList[E_TestEquipmentAlarmList.WarningAlarm], ConcatenateMessage := '');
 		
 		E_TestEquipmentAlarmList.ErrorAlarm:
-			_RaiseAlarm(ErrorToRaise := TestAlarmList[E_TestEquipmentAlarmList.ErrorAlarm], ConcatenateMessage := '');
+			_RaiseAlarm(AlarmToRaise := TestAlarmList[E_TestEquipmentAlarmList.ErrorAlarm], ConcatenateMessage := '');
 		
 		E_TestEquipmentAlarmList.CriticalAlarm:
-			_RaiseAlarm(ErrorToRaise := TestAlarmList[E_TestEquipmentAlarmList.CriticalAlarm], ConcatenateMessage := '');
+			_RaiseAlarm(AlarmToRaise := TestAlarmList[E_TestEquipmentAlarmList.CriticalAlarm], ConcatenateMessage := '');
 		
 	END_CASE
 

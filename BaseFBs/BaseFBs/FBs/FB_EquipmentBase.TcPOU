@@ -39,15 +39,15 @@ EquipmentBaseFirstScan := FALSE;]]></ST>
     <Method Name="_RaiseAlarm" Id="{0301a642-de40-43e4-8a9e-3537a1e87242}" FolderPath="Protected\">
       <Declaration><![CDATA[METHOD PROTECTED _RaiseAlarm
 VAR_INPUT
-	ErrorToRaise	: REFERENCE TO ST_EquipmentAlarm;
+	AlarmToRaise	: REFERENCE TO ST_EquipmentAlarm;
 	ConcatenateMessage	: T_MaxString;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ErrorToRaise.Active := TRUE;
+        <ST><![CDATA[AlarmToRaise.Active := TRUE;
 
-IF (NOT _MainAlarm.Active) OR (ErrorToRaise.Severity > _MainAlarm.Severity) THEN
-	_MainAlarm := ErrorToRaise;
+IF (NOT _MainAlarm.Active) OR (AlarmToRaise.Severity > _MainAlarm.Severity) THEN
+	_MainAlarm := AlarmToRaise;
 	
 	IF ConcatenateMessage <> '' THEN
 		_MainAlarm.Message := CONCAT(STR1 := _MainAlarm.Message, STR2 := ConcatenateMessage);

@@ -11,7 +11,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{C4B03FC6-6E46-40ED-A713-18E927403C49}" Name="BaseFBs" PrjFilePath="BaseFBs\BaseFBs.plcproj" TmcFilePath="BaseFBs\BaseFBs.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{BCDC494C-3FC3-38D7-DE1D-47F2F7B95E3F}" TmcPath="BaseFBs\BaseFBs.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{57746E96-BD80-56AD-3BAA-F3E5BFF4EE89}" TmcPath="BaseFBs\BaseFBs.tmc">
 					<Name>BaseFBs Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
