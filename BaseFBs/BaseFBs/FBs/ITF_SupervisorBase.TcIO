@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="ITF_SupervisorBase" Id="{d5e2071f-3a5c-46a3-8dce-c88196d2fb5d}">
+    <Declaration><![CDATA[INTERFACE ITF_SupervisorBase
+]]></Declaration>
+    <Method Name="CheckAlarmCondition" Id="{2048111b-c45c-442b-96ce-53f793b762cc}">
+      <Declaration><![CDATA[METHOD CheckAlarmCondition
+VAR_INPUT
+	AlarmToRaise		: ST_EquipmentAlarm;
+	ConcatenateMessage	: T_MaxString;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="CheckAlarmConditionCustom" Id="{b8a112f7-5315-47aa-b45e-2c9cd642ca56}">
+      <Declaration><![CDATA[METHOD CheckAlarmConditionCustom
+VAR_INPUT
+	Active	: BOOL;
+	Message	: T_MaxString;
+	Severity	: TcEventSeverity;
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="CompileAlarmList" Id="{a4d8bc82-0f7d-40a7-9aa7-94a4d21e336f}">
+      <Declaration><![CDATA[METHOD CompileAlarmList
+VAR_INPUT
+	AlarmListDetails		: ST_EquipmentAlarmListDetails;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

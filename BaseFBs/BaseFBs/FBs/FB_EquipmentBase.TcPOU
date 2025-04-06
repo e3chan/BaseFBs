@@ -29,7 +29,7 @@ EquipmentBaseFirstScan := FALSE;]]></ST>
     <Folder Name="Private" Id="{eaa50c90-413b-48b9-b08b-9d6ab1b7b566}" />
     <Folder Name="Protected" Id="{f7e2bf14-fbfe-4dc5-9ea4-cc998f72e84e}" />
     <Method Name="_GenerateAlarmList" Id="{e2f68562-f932-489c-967c-792a0bdd46a0}" FolderPath="Protected\">
-      <Declaration><![CDATA[METHOD PROTECTED ABSTRACT _GenerateAlarmList
+      <Declaration><![CDATA[METHOD PROTECTED _GenerateAlarmList
  
 ]]></Declaration>
       <Implementation>

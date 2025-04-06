@@ -22,7 +22,7 @@
     <GlobalVersionStructureIncluded>false</GlobalVersionStructureIncluded>
     <Company>Personal</Company>
     <Title>BaseFBs</Title>
-    <ProjectVersion>1.0.0.2</ProjectVersion>
+    <ProjectVersion>1.0.0.3</ProjectVersion>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="FBs\FB_Base.TcPOU">
@@ -34,11 +34,21 @@
     <Compile Include="FBs\FB_Alarm.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FBs\FB_SupervisorBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="FBs\ITF_Base.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="FBs\ITF_EquipmentBase.TcIO">
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FBs\ITF_SupervisorBase.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FBs\Param_SupervisorBase.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
     </Compile>
     <Compile Include="FBs\Structure\ST_BaseDefinition.TcDUT">
       <SubType>Code</SubType>

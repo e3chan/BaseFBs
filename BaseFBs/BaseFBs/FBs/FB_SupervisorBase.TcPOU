@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_SupervisorBase" Id="{e5ced0bb-6459-4ec0-b24f-390f70653b93}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SupervisorBase EXTENDS FB_EquipmentBase IMPLEMENTS ITF_SupervisorBase
+VAR
+	CompiledAlarm, CompiledAlarm_Intermediate		: ARRAY[0..Param_SupervisorBase.AlarmListSize] OF ST_EquipmentAlarm;	
+	EmptyAlarm						: ST_EquipmentAlarm;	
+	AlarmListIndex					: DINT;
+	index							: DINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[SUPER^();
+
+_ResetAlarmList();
+]]></ST>
+    </Implementation>
+    <Folder Name="Private" Id="{4bbf687f-33e9-48d1-9767-fcaa51647d7b}" />
+    <Method Name="_ResetAlarmList" Id="{6956ff40-ddf7-4687-b2f2-928522c8e571}" FolderPath="Private\">
+      <Declaration><![CDATA[METHOD PRIVATE _ResetAlarmList
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MEMMOVE(destAddr := ADR(CompiledAlarm), srcAddr := ADR(CompiledAlarm_Intermediate), n := SIZEOF(CompiledAlarm));
+MEMSET(destAddr := ADR(CompiledAlarm_Intermediate), fillByte := 0, n := SIZEOF(CompiledAlarm_Intermediate));
+AlarmListIndex := 0;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CheckAlarmCondition" Id="{694a4697-29af-4500-808a-3cf886f72b9b}">
+      <Declaration><![CDATA[{warning 'Add method implementation '}
+METHOD CheckAlarmCondition
+VAR_INPUT
+	AlarmToRaise		: ST_EquipmentAlarm;
+	ConcatenateMessage	: T_MaxString;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^._RaiseAlarm(	AlarmToRaise := AlarmToRaise,
+					ConcatenateMessage := ConcatenateMessage);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CheckAlarmConditionCustom" Id="{1111cfcf-da82-432c-800c-10e24a796280}">
+      <Declaration><![CDATA[{warning 'Add method implementation '}
+METHOD CheckAlarmConditionCustom
+VAR_INPUT
+	Active	: BOOL;
+	Message	: T_MaxString;
+	Severity	: TcEventSeverity;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT Active THEN
+	RETURN;
+END_IF
+
+_MainAlarm.Active := TRUE;
+
+IF (Severity > _MainAlarm.Severity) THEN
+	
+	_MainAlarm.Severity := Severity;
+	_MainAlarm.Message := Message;
+	
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CompileAlarmList" Id="{00e0d295-e22f-4653-b318-5f96a9af8cf3}">
+      <Declaration><![CDATA[{warning 'Add method implementation '}
+METHOD CompileAlarmList
+VAR_INPUT
+	AlarmListDetails	: ST_EquipmentAlarmListDetails;
+END_VAR
+
+VAR
+	MemoryPosition		: POINTER TO ST_EquipmentAlarm;
+	i : DINT;
+
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF AlarmListIndex > Param_SupervisorBase.AlarmListSize THEN
+	RETURN;
+END_IF
+
+IF AlarmListDetails.AlarmListSize = 0 THEN
+	RETURN;
+END_IF
+
+IF AlarmListDetails.FirstAlarm = 0 THEN
+	RETURN;
+END_IF
+
+FOR i := 0 TO (AlarmListDetails.AlarmListSize - 1) BY 1 DO
+	
+	MemoryPosition := AlarmListDetails.FirstAlarm + SIZEOF(EmptyAlarm)*i;
+	
+	IF MemoryPosition^.Active THEN
+		CompiledAlarm_Intermediate[AlarmListIndex] := MemoryPosition^;
+		AlarmListIndex := AlarmListIndex +1;
+	END_IF
+
+END_FOR]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
